@@ -46,4 +46,18 @@ async function saveFile() {
     console.log(`https://ipfs.io/ipfs/${hash}`);
     return hash;
 }
-saveFile()
+//saveFile()
+
+async function getData(hash) {
+    let ipfs = await ipfsClient();
+
+    let asyncitr = ipfs.cat(hash)
+
+    for await (const itr of asyncitr) {
+
+        let data = Buffer.from(itr).toString()
+        console.log(data)
+    }
+}
+
+getData("QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn")
