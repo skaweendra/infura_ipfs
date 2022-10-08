@@ -23,41 +23,6 @@ async function saveText() {
     console.log(result);
 }
 
-// saveText();
-
-async function saveFile() {
-
-    let ipfs = await ipfsClient();
+saveText();
 
 
-    let data = {
-        name:"test",
-        description:"test",
-        image:"test"
-    }
-
-
-    let options = {
-        warpWithDirectory: true,
-        progress: (prog) => console.log(`Saved :${prog}`)
-    }
-    let result = await ipfs.add({path:"hash.json",content:JSON.stringify(data)},options);
-    let hash = result.cid.toString();
-    console.log(`https://ipfs.io/ipfs/${hash}`);
-    return hash;
-}
-//saveFile()
-
-async function getData(hash) {
-    let ipfs = await ipfsClient();
-
-    let asyncitr = ipfs.cat(hash)
-
-    for await (const itr of asyncitr) {
-
-        let data = Buffer.from(itr).toString()
-        console.log(data)
-    }
-}
-
-getData("QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn")
